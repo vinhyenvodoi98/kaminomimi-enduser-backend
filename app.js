@@ -1,0 +1,36 @@
+const express = require('express');
+const helmet = require('helmet');
+const logger = require('morgan');
+const multer = require('multer');
+const port = process.env.PORT || 4000;
+const upload = multer();
+
+// import routes
+const mentions = require('./routers/mentions.routes');
+const auth = require('./routers/auth.routes');
+const user = require('./routers/user.routes');
+const app = express();
+
+app.use(helmet());
+app.use(express.json());
+app.use(logger('dev'));
+// for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// for parsing multipart/form-data
+app.use(upload.array());
+
+// database
+const db = require('./models');
+db.sequelize.sync();
+// routes
+app.get('/', function (req, res) {
+  res.send('Ok');
+});
+app.use('/mention', mentions);
+app.use('/user', user);
+app.use('/auth', auth);
+
+// launch ======================================================================
+app.listen(port);
+console.log(`server working on ${port}`);
