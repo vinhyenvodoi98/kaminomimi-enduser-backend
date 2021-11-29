@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.dialect,
-  operatorsAliases: false,
+  operatorsAliases: 0,
 
   pool: {
     max: config.pool.max,
@@ -26,11 +26,11 @@ db.twitter_user = require('../models/twitter_user.model')(sequelize, Sequelize);
 db.tweet = require('../models/tweet.model')(sequelize, Sequelize);
 db.tweet_alert = require('../models/tweet_alert.model')(sequelize, Sequelize);
 
-db.keywords.hasMany(db.counter, { as: 'counter' });
-db.counter.belongsTo(db.keywords, {
-  foreignKey: 'keywordId',
-  as: 'keyword',
-});
+// db.keywords.hasMany(db.counter, { as: 'counter' });
+// db.counter.belongsTo(db.keywords, {
+//   foreignKey: 'keywordId',
+//   as: 'keyword',
+// });
 
 db.keywords.hasMany(db.tweet_alert, { as: 'tweet_alert' });
 db.tweet_alert.belongsTo(db.keywords, {

@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const logger = require('morgan');
 const multer = require('multer');
+const cors = require('cors');
 const port = process.env.PORT || 4000;
 const upload = multer();
 
@@ -11,6 +12,7 @@ const auth = require('./routers/auth.routes');
 const user = require('./routers/user.routes');
 const app = express();
 
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(logger('dev'));
