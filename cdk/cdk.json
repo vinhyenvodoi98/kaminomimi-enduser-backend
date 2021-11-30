@@ -1,0 +1,4 @@
+{
+  "app": "node --loader ts-node/esm index.ts",
+  "requireApproval": "never"
+}

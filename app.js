@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const logger = require('morgan');
 const multer = require('multer');
 const cors = require('cors');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 80;
 const upload = multer();
 
 // import routes
@@ -27,7 +27,7 @@ const db = require('./models');
 db.sequelize.sync();
 // routes
 app.get('/', function (req, res) {
-  res.send('Ok');
+  res.send('user Ok');
 });
 app.use('/mention', mentions);
 app.use('/user', user);
