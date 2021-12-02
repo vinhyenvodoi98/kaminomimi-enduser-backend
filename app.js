@@ -24,7 +24,14 @@ app.use(upload.array());
 
 // database
 const db = require('./models');
-db.sequelize.sync();
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 // routes
 app.get('/', function (req, res) {
   res.send('user Ok');

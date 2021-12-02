@@ -1,9 +1,7 @@
 const router = require('express').Router();
-
+const controller = require('../controllers/mentions.controller');
 // const { getAllMentionInDay } = require('../knex/query');
 
-router.get('/', async (req, res) => {
-  res.json('ok');
-});
+router.get('/', controller.getAllInday);
 
 module.exports = router;
